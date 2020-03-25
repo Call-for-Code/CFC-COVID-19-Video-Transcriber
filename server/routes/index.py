@@ -29,7 +29,7 @@ def hello_world():
 def language_models():
     models = app.config['LANGUAGE_TRANSLATOR'].list_models().get_result()
     languages = app.config['LANGUAGE_TRANSLATOR'].list_identifiable_languages().get_result()
-    return jsonify({"models": models, "languages": languages})
+    return jsonify({"models": models["models"], "languages": languages["languages"]})
 
 @app.route("/upload_video", methods=['POST'])
 def upload_video():

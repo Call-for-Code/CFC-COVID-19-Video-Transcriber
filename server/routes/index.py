@@ -62,7 +62,7 @@ def upload_video():
         thread.daemon = True
         thread.start()
 
-        # return socket.io namespace for listening for video updates
+        # return mqtt namespace for listening for video updates
         return jsonify({"msg": "file uploaded", "mqtt_topic": mqtt_topic})
     else:
         return jsonify({"error": "File must be one of: "+json.dumps(ALLOWED_EXTENSIONS)}), 400

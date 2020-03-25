@@ -8,12 +8,14 @@ import os, uuid
 BASE = os.path.dirname(os.getcwd()) + '/cfc-covid-19-video-transcriber-starter/server'
 UPLOAD_FOLDER = BASE + '/video_uploads'
 AUDIO_FOLDER = BASE + '/audio_extractions'
+OUTPUT_FOLDER = BASE + '/output_transcripts'
 ALLOWED_EXTENSIONS = {'mp4', 'avi', 'mpeg', 'mov', 'm4v'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(AUDIO_FOLDER, exist_ok=True)
+os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -23,6 +25,11 @@ def allowed_file(filename):
 def hello_world():
     return app.send_static_file('index.html')
 
+@app.route("/language_models", methods=['GET'])
+def language_models():
+    models = app.config['LANGUAGE_TRANSLATOR'].list_models().get_result()
+    languages = app.config['LANGUAGE_TRANSLATOR'].list_identifiable_languages().get_result()
+    return jsonify({"models": models, "languages": languages})
 
 @app.route("/upload_video", methods=['POST'])
 def upload_video():
@@ -42,13 +49,23 @@ def upload_video():
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], new_filename)
         file.save(file_path)
 
+        # extract translation fields if specified
+        source = None
+        target = None
+        form_fields = request.form.to_dict(flat=False)
+        if 'source' in form_fields and 'target' in form_fields:
+            source = form_fields['source'][0]
+            target = form_fields['target'][0]
+
         # start pipeline as a new thread
-        thread = Thread(target=process_video, args=(file_path,new_filename,mqtt_topic,))
+        thread = Thread(target=process_video, args=(file_path,new_filename,mqtt_topic,source,target,))
         thread.daemon = True
         thread.start()
 
         # return socket.io namespace for listening for video updates
         return jsonify({"msg": "file uploaded", "mqtt_topic": mqtt_topic})
+    else:
+        return jsonify({"error": "File must be one of: "+json.dumps(ALLOWED_EXTENSIONS)}), 400
 
 
 @app.errorhandler(404)

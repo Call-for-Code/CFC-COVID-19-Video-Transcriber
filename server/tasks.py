@@ -1,7 +1,5 @@
 import time
 from server import app
-import imageio
-imageio.plugins.ffmpeg.download()
 from moviepy.editor import *
 from ibm_watson import SpeechToTextV1 
 from ibm_watson.websocket import RecognizeCallback, AudioSource 

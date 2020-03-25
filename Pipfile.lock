@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0032afa91f0d3b63c431af170174b35a3c856f480a0f3b44316c3ffe6cb3405a"
+            "sha256": "fb5b8d36b2d930e35fd1bf7ae04a83fc64fd304f6c5732a1ac27b9bf62094272"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -64,6 +64,19 @@
             ],
             "index": "pypi",
             "version": "==19.7.1"
+        },
+        "ibm-cloud-sdk-core": {
+            "hashes": [
+                "sha256:62b00255df06cb96e32b8daa6dee78b073690591a2d2ec16b24d99f1c39180f7"
+            ],
+            "version": "==1.5.1"
+        },
+        "ibm-watson": {
+            "hashes": [
+                "sha256:e63aa9cba00d0b00eba82c78a40caf62876001b75dacb5ab7244023367894774"
+            ],
+            "index": "pypi",
+            "version": "==4.3.0"
         },
         "ibmcloudenv": {
             "hashes": [
@@ -250,6 +263,20 @@
             "index": "pypi",
             "version": "==0.7.1"
         },
+        "pyjwt": {
+            "hashes": [
+                "sha256:5c6eca3c2940464d106b99ba83b00c6add741c9becaec087fb7ccdefea71350e",
+                "sha256:8d59a976fb773f3e6a39c85636357c4f0e242707394cadadd9814f5cbaa20e96"
+            ],
+            "version": "==1.7.1"
+        },
+        "python-dateutil": {
+            "hashes": [
+                "sha256:73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c",
+                "sha256:75bb3f31ea686f1197762692a9ee6a7550b59fc6ca3a1f4b5d7e32fb98e2da2a"
+            ],
+            "version": "==2.8.1"
+        },
         "python-dotenv": {
             "hashes": [
                 "sha256:81822227f771e0cab235a2939f0f265954ac4763cafd806d845801c863bf372f",
@@ -299,6 +326,13 @@
                 "sha256:87716c2d2a7121198ebcb7ce7cccf6ce5e9ba539041cfbaeecfb641dc0bf6acc"
             ],
             "version": "==1.25.8"
+        },
+        "websocket-client": {
+            "hashes": [
+                "sha256:18f1170e6a1b5463986739d9fd45c4308b0d025c1b2f9b88788d8f69e8a5eb4a",
+                "sha256:db70953ae4a064698b27ae56dcad84d0ee68b7b43cb40940f537738f38f510c1"
+            ],
+            "version": "==0.48.0"
         },
         "werkzeug": {
             "hashes": [

@@ -2,7 +2,7 @@ applications:
 - instances: 1
   timeout: 180
   name: cfc-covid-19-video-transcriber-starter
-  buildpack: python_buildpack
+  buildpack: https://github.com/DanCunnington/python-buildpack
   command: python manage.py start 0.0.0.0:$PORT
   memory: 512M
   env:

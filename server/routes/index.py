@@ -5,17 +5,7 @@ from server.tasks import process_video
 
 import os, uuid
 
-BASE = os.path.dirname(os.getcwd()) + '/cfc-covid-19-video-transcriber-starter/server'
-UPLOAD_FOLDER = BASE + '/video_uploads'
-AUDIO_FOLDER = BASE + '/audio_extractions'
-OUTPUT_FOLDER = BASE + '/output_transcripts'
 ALLOWED_EXTENSIONS = {'mp4', 'avi', 'mpeg', 'mov', 'm4v'}
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-os.makedirs(AUDIO_FOLDER, exist_ok=True)
-os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 def allowed_file(filename):
     return '.' in filename and \

@@ -7,11 +7,6 @@ from server.services.cos import multi_part_upload
 
 import json, os
 
-BASE = os.path.dirname(os.getcwd()) + '/cfc-covid-19-video-transcriber-starter/server'
-VIDEO_BASE = BASE +'/video_uploads'
-AUDIO_BASE = BASE +'/audio_extractions'
-OUTPUT_BASE = BASE + '/output_transcripts'
-
 def process_video(file_path, file_name, mqtt_topic, source=None, target=None):
     # Extract Audio
     app.config['MQTT_CLIENT'].publish(mqtt_topic, json.dumps({"msg_id": 0, "msg": "Extracting audio from video"}))
@@ -19,7 +14,7 @@ def process_video(file_path, file_name, mqtt_topic, source=None, target=None):
     audio = video.audio
 
     app.config['MQTT_CLIENT'].publish(mqtt_topic, json.dumps({"msg_id": 1, "msg": "Saving audio file"}))
-    audio_file_path = AUDIO_BASE+'/'+file_name.split('.')[0]+'.mp3'
+    audio_file_path = os.path.join(app.config['AUDIO_FOLDER'],file_name.split('.')[0]+'.mp3')
     audio.write_audiofile(audio_file_path)
 
     # Perform speech to text
@@ -51,7 +46,7 @@ def process_video(file_path, file_name, mqtt_topic, source=None, target=None):
     # Save results to cloud object storage
     app.config['MQTT_CLIENT'].publish(mqtt_topic, json.dumps({"msg_id": 7, "msg": "Saving results to cloud object storage"}))
     output_file = file_name.split('.')[0]+'.txt'
-    output_path = OUTPUT_BASE+'/'+output_file
+    output_path = os.path.join(app.config['OUTPUT_FOLDER'],output_file)
     f = open(output_path, "w")
     f.write(transcript)
     f.close()

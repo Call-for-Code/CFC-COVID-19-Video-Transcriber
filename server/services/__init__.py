@@ -10,7 +10,7 @@ from ibm_watson import LanguageTranslatorV3
 from dotenv import load_dotenv
 import ibm_boto3
 from ibm_botocore.client import Config, ClientError
-import os
+import os, platform
 
 IBMCloudEnv.init()
 
@@ -46,5 +46,16 @@ def initServices(app):
     app.config['COS'] = cos
     app.config['COS_BUCKET_NAME'] = os.getenv("COS_BUCKET_NAME")
     app.config['COS_ENDPOINT'] = os.getenv("COS_ENDPOINT")
+
+    # Setup config
+    app.config['BASE'] = os.path.join(os.path.dirname(os.getcwd()),'cfc-covid-19-video-transcriber-starter') 
+    app.config['BASE'] = os.path.join(app.config['BASE'], 'server')
+    app.config['UPLOAD_FOLDER'] = os.path.join(app.config['BASE'], 'video_uploads')
+    app.config['AUDIO_FOLDER'] = os.path.join(app.config['BASE'], 'audio_extractions')
+    app.config['OUTPUT_FOLDER'] = os.path.join(app.config['BASE'], 'output_transcripts')
+
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+    os.makedirs(app.config['AUDIO_FOLDER'], exist_ok=True)
+    os.makedirs(app.config['OUTPUT_FOLDER'], exist_ok=True)
 
     return

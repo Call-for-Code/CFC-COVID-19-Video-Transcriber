@@ -11,6 +11,7 @@
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.8.0",
     "core-js": "^3.6.4",
+    "mqtt": "^3.0.0",
     "vue": "^2.6.11",
     "vue2-dropzone": "^3.6.0"
   },

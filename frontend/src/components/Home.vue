@@ -42,12 +42,33 @@
 <script>
 import Upload from './Upload'
 import Transcript from './Transcript'
+import MqttClient from 'mqtt'
 
 export default {
   name: 'Home',
   components: {
     Upload,
     Transcript
+  },
+  data() {
+    return {
+      mqttClient: null
+    }
+  },
+  mounted: function() {
+    this.mqttClient = MqttClient.connect('ws://test.mosquitto.org:8080')
+    this.mqttClient.on('connect', () => {
+      console.log('MQTT client connected')
+    })
+  },
+  methods: {
+    subscribeToTopic(topic) {
+      this.mqttClient.subscribe(topic)
+      this.mqttClient.on('message', (topic, message) => {
+        console.log('New message received')
+        console.log(message.toString())
+      })
+    }
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+        <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions" @vdropzone-success="fileUploaded"></vue-dropzone>
     </div>
 </template>
 
@@ -22,6 +22,12 @@ export default {
           headers: { "My-Awesome-Header": "header value" },
           dictDefaultMessage: "<b-icon-arrow-up></b-icon-arrow-up><h3>Drop a video here to upload</h3><img src='./upload.png' class='upload-icon'/>"
       }
+    }
+  },
+  methods: {
+    fileUploaded(file, response) {
+      console.log(response)
+      this.$parent.subscribeToTopic(response.mqtt_topic)
     }
   }
 }

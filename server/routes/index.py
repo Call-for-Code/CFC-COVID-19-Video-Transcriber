@@ -2,8 +2,11 @@ from server import app
 from flask import render_template, flash, jsonify, request, redirect
 from threading import Thread
 from server.tasks import process_video
-
+from flask_cors import CORS, cross_origin
 import os, uuid
+
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 ALLOWED_EXTENSIONS = {'mp4', 'avi', 'mpeg', 'mov', 'm4v'}
 
@@ -16,12 +19,14 @@ def hello_world():
     return app.send_static_file('index.html')
 
 @app.route("/language_models", methods=['GET'])
+@cross_origin()
 def language_models():
     models = app.config['LANGUAGE_TRANSLATOR'].list_models().get_result()
     languages = app.config['LANGUAGE_TRANSLATOR'].list_identifiable_languages().get_result()
     return jsonify({"models": models["models"], "languages": languages["languages"]})
 
 @app.route("/upload_video", methods=['POST'])
+@cross_origin()
 def upload_video():
     # check if the post request has the file part
     if 'file' not in request.files:

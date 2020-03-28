@@ -18,7 +18,7 @@ In this tutorial, you'll learn how to:
 To complete this tutorial, you must:
 
 * Register for an [IBM Cloud](https://www.ibm.com/account/reg/us-en/signup?formid=urx-42793&eventid=cfc-2020?cm_mmc=OSocial_Blog-_-Audience+Developer_Developer+Conversation-_-WW_WW-_-cfc-2020-ghub-starterkit-education_ov75914&cm_mmca1=000039JL&cm_mmca2=10008917) account.
-* Install [`Python`](https://www.python.org/downloads/).
+* Install [`Python 3.6`](https://www.python.org/downloads/).
 * Install the [`Pipenv`](https://pypi.org/project/pipenv/) Python packaging tool.
 * Install [`Node.js`](https://nodejs.org).
 * Install [`Yarn`](https://classic.yarnpkg.com/en/docs/install/).

@@ -139,10 +139,6 @@ To get started building this application locally, you can either run the applica
 
 Native application development was covered in step 2 above when you installed and ran the app. Your application is running at: `http://localhost:3000/` in your browser.
 
-  - Your [Swagger UI](http://swagger.io/swagger-ui/) is running on: `/explorer`
-  - Your Swagger definition is running on: `/swagger/api`
-  - Health endpoint: `/health`
-
 There are two different options for debugging a Flask project:
 
 1. Run `python manage.py runserver` to start a native Flask development server. This comes with the Werkzeug stack-trace debugger, which will present runtime failure stack-traces in-browser with the ability to inspect objects at any point in the trace. For more information, see [Werkzeug documentation](http://werkzeug.pocoo.org/).

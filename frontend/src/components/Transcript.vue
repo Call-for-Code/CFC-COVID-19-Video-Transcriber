@@ -10,7 +10,7 @@
       </b-row>
       <b-row class="pl-3 pr-3">
           <b-col class="transcript-container">
-              <samp>This text is a sample output from the transcription app.</samp>
+              <samp>{{ response }}</samp>
           </b-col>
       </b-row>
   </div>
@@ -18,7 +18,8 @@
 
 <script>
 export default {
-  name: 'Transcript'
+  name: 'Transcript',
+  props: ['response']
 }
 </script>
 

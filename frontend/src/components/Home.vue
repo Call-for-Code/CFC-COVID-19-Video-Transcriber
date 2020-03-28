@@ -32,7 +32,7 @@
 
           <b-row>
             <b-col cols="8" class="mx-auto">
-              <Transcript />
+              <Transcript v-bind:response="transcriptResponse"/>
             </b-col>
           </b-row>
       </b-container>
@@ -44,6 +44,8 @@ import Upload from './Upload'
 import Transcript from './Transcript'
 import MqttClient from 'mqtt'
 
+let transcriptResponse = ''
+
 export default {
   name: 'Home',
   components: {
@@ -52,21 +54,23 @@ export default {
   },
   data() {
     return {
-      mqttClient: null
+      mqttClient: null,
+      transcriptResponse
     }
   },
   mounted: function() {
     this.mqttClient = MqttClient.connect('ws://test.mosquitto.org:8080')
     this.mqttClient.on('connect', () => {
-      console.log('MQTT client connected')
+      // console.log('MQTT client connected')
     })
   },
   methods: {
     subscribeToTopic(topic) {
       this.mqttClient.subscribe(topic)
       this.mqttClient.on('message', (topic, message) => {
-        console.log('New message received')
-        console.log(message.toString())
+        this.transcriptResponse = message.toString()
+        // console.log('New message received')
+        console.log(transcriptResponse)
       })
     }
   }

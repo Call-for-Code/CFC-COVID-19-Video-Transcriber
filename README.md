@@ -18,7 +18,7 @@ In this tutorial, you'll learn how to:
 To complete this tutorial, you must:
 
 * Register for an [IBM Cloud](https://www.ibm.com/account/reg/us-en/signup?formid=urx-42793&eventid=cfc-2020?cm_mmc=OSocial_Blog-_-Audience+Developer_Developer+Conversation-_-WW_WW-_-cfc-2020-ghub-starterkit-education_ov75914&cm_mmca1=000039JL&cm_mmca2=10008917) account.
-* Install [`Python`](https://www.python.org/downloads/).
+* Install [`Python 3.6`](https://www.python.org/downloads/).
 * Install the [`Pipenv`](https://pypi.org/project/pipenv/) Python packaging tool.
 * Install [`Node.js`](https://nodejs.org).
 * Install [`Yarn`](https://classic.yarnpkg.com/en/docs/install/).
@@ -138,10 +138,6 @@ To get started building this application locally, you can either run the applica
 #### Native application development
 
 Native application development was covered in step 2 above when you installed and ran the app. Your application is running at: `http://localhost:3000/` in your browser.
-
-  - Your [Swagger UI](http://swagger.io/swagger-ui/) is running on: `/explorer`
-  - Your Swagger definition is running on: `/swagger/api`
-  - Health endpoint: `/health`
 
 There are two different options for debugging a Flask project:
 

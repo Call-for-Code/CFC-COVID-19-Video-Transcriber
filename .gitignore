@@ -12,3 +12,4 @@ server/audio_extractions/*.mp3
 server/output_transcripts/*.txt
 frontend/node_modules
 frontend/dist
+__pycache__

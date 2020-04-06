@@ -34,7 +34,7 @@ This tutorial should take about 30 minutes to complete.
 
     * [IBM Watson Speech to Text](https://www.ibm.com/cloud/watson-speech-to-text)
     * [IBM Watson Language Translator](https://www.ibm.com/watson/services/language-translator/)
-    * [IBM Cloud Object Storage](https://www.ibm.com/cloud/object-storage)
+    * [IBM Cloud Object Storage](https://www.ibm.com/cloud/object-storage). Note - to view the resulting transcript in the UI, the bucket you create in Cloud Object Storage requires [public access](https://cloud.ibm.com/docs/services/cloud-object-storage/iam/public-access.html).
 
 2. Create an `.env` file in the root project directory containing the following service credentials as environment variables:
 

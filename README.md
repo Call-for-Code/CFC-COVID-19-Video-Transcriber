@@ -40,6 +40,7 @@ This tutorial should take about 30 minutes to complete.
 
 ```
 IAM_AUTHENTICATOR_STT=<api key for speech to text service>
+IAM_AUTHENTICATOR_STT_URL=<url for speech to text service>
 IAM_AUTHENTICATOR_TRANSLATE=<api key for translation service>
 LANGUAGE_TRANSLATOR_SERVICE=<translator service endpoint. e.g. https://api.eu-gb.language-translator.watson.cloud.ibm.com>
 COS_API_KEY_ID=<cloud object storage api key>

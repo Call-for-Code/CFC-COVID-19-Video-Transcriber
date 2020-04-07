@@ -25,6 +25,7 @@ def initServices(app):
     load_dotenv()
     authenticator = IAMAuthenticator(os.getenv("IAM_AUTHENTICATOR_STT")) 
     service = SpeechToTextV1(authenticator=authenticator) 
+    service.set_service_url(os.getenv("IAM_AUTHENTICATOR_STT_URL"))
     app.config['SPEECH_TO_TEXT'] = service
 
     authenticator_translate = IAMAuthenticator(os.getenv("IAM_AUTHENTICATOR_TRANSLATE")) 

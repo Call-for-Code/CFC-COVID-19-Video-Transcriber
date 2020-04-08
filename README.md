@@ -54,7 +54,10 @@ COS_BUCKET_NAME=<cloud object storage bucket name. e.g. transcripts>
 
 ### Server
 
-1. If you have not done so already, install [Python](https://www.python.org/downloads/) and [Pipenv](https://pypi.org/project/pipenv/).
+1. If you have not done so already, install [Python](https://www.python.org/downloads/) and [Pipenv](https://pypi.org/project/pipenv/). Activate the pipenv shell:
+      ```bash
+      pipenv shell
+      ```
     
 2. From your project root, download the project dependencies: 
     

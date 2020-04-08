@@ -37,16 +37,20 @@ def initServices(app):
     app.config['LANGUAGE_TRANSLATOR'] = language_translator
 
     # IBM COS
+    app.config['COS_ENDPOINT'] = os.getenv("COS_ENDPOINT")
+    if not app.config['COS_ENDPOINT'].startswith('http') or not app.config['COS_ENDPOINT'].startswith('https'):
+           app.config['COS_ENDPOINT'] = 'https://' + app.config['COS_ENDPOINT']
+           
     cos = ibm_boto3.resource("s3",
         ibm_api_key_id=os.getenv("COS_API_KEY_ID"),
         ibm_service_instance_id=os.getenv("COS_RESOURCE_CRN"),
         ibm_auth_endpoint=os.getenv("COS_AUTH_ENDPOINT"),
         config=Config(signature_version="oauth"),
-        endpoint_url=os.getenv("COS_ENDPOINT")
+        endpoint_url=app.config['COS_ENDPOINT'] 
     )
     app.config['COS'] = cos
     app.config['COS_BUCKET_NAME'] = os.getenv("COS_BUCKET_NAME")
-    app.config['COS_ENDPOINT'] = os.getenv("COS_ENDPOINT")
+    
 
     # Setup config
     app.config['BASE'] = os.path.join(os.path.dirname(os.getcwd()),'cfc-covid-19-video-transcriber-starter') 

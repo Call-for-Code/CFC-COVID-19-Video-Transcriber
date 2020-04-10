@@ -64,7 +64,7 @@ Register/Login to [IBM Cloud](https://cloud.ibm.com) and create the following se
     ```bash
     pipenv --python <path to python executable>
     ```
-    e.g. if python 3.6 is installed:
+    Note. If python 3.6 is installed in the default location, this can be specified as:
     ```bash
     pipenv --python 3.6
     ```

@@ -6,7 +6,6 @@ The app you build in this tutorial will enable instructors to provide additional
 The code and related files for this tutorial are located in the accompanying <a href="https://github.com/Call-for-Code/cfc-covid-19-video-transcriber" target="\_blank">GitHub repo</a>.
 
 ## Learning objectives
-
 In this tutorial, you'll learn how to:
 
 * Create a Python app that can extract text from instructional videos using Watson Speech to Text. 
@@ -14,7 +13,6 @@ In this tutorial, you'll learn how to:
 * Create a Vue.js frontend that enables users to upload videos and receive the resulting transcription.
 
 ## Prerequisites
-
 To complete this tutorial, you must:
 
 * Register for an [IBM Cloud](https://www.ibm.com/account/reg/us-en/signup?formid=urx-42793&eventid=cfc-2020?cm_mmc=OSocial_Blog-_-Audience+Developer_Developer+Conversation-_-WW_WW-_-cfc-2020-ghub-starterkit-education_ov75914&cm_mmca1=000039JL&cm_mmca2=10008917) account.
@@ -24,20 +22,17 @@ To complete this tutorial, you must:
 * Install [`Yarn`](https://classic.yarnpkg.com/en/docs/install/).
 
 ## Estimated time
-
 This tutorial should take about 30 minutes to complete.
 
+## Instructions
+## 1. Clone the repository
+```bash
+git clone git@github.com:Call-for-Code/cfc-covid-19-video-transcriber.git
+cd cfc-covid-19-video-transcriber
+```
 
-## 1. Set up the services and object storage
-
-1. Login to [IBM Cloud](https://cloud.ibm.com) and create the following services:
-
-    * [IBM Watson Speech to Text](https://www.ibm.com/cloud/watson-speech-to-text)
-    * [IBM Watson Language Translator](https://www.ibm.com/watson/services/language-translator/)
-    * [IBM Cloud Object Storage](https://www.ibm.com/cloud/object-storage). Note - to view the resulting transcript in the UI, the bucket you create in Cloud Object Storage requires [public access](https://cloud.ibm.com/docs/services/cloud-object-storage/iam/public-access.html).
-
-2. Create an `.env` file in the root project directory containing the following service credentials as environment variables:
-
+## 2. Setup environment variables
+Create a `.env` file in the root project directory containing the following environment variables. Note - these will be replaced by your IBM Cloud service credentials in the next step.
 ```
 STT_API_KEY=<api key for speech to text service>
 STT_URL=<URL for speech to text service>
@@ -46,79 +41,90 @@ TRANSLATE_URL=<URL for translator service>
 COS_API_KEY=<cloud object storage api key>
 COS_IAM_ROLE_CRN=<cloud object storage IAM role crn. e.g. crn:v1:bluemix:public:iam::::serviceRole:Writer>
 COS_ENDPOINT=<cloud object storage endpoint. e.g. s3.eu-gb.cloud-object-storage.appdomain.cloud>
-COS_BUCKET_NAME=<cloud object storage bucket name. e.g. transcripts>
+COS_BUCKET_NAME=<cloud object storage bucket name>
 ```
 
-## 2. Install and run the app
+## 3. Create IBM Cloud services and obtain service credentials
+Register/Login to [IBM Cloud](https://cloud.ibm.com) and create the following services:
+   * [IBM Watson Speech to Text](https://www.ibm.com/cloud/watson-speech-to-text)
+        * Copy the `apikey` and `url` values within the service credentials to the `STT_API_KEY` and `STT_URL` environment variables in the `.env` file you created in step 2.
+
+   * [IBM Watson Language Translator](https://www.ibm.com/watson/services/language-translator/)
+        * Copy the `apikey` and `url` values within the service credentials to the `TRANSLATE_API_KEY` and `TRANSLATE_URL` environment variables in the `.env` file you created in step 2.
+
+   * [IBM Cloud Object Storage](https://www.ibm.com/cloud/object-storage). 
+        * Create a standard bucket with a given name. Copy this name to the `COS_BUCKET_NAME` environment variable in the `.env` file you created in step 2. For the purposes of this starter kit, the bucket you create in Cloud Object Storage requires [public access](https://cloud.ibm.com/docs/services/cloud-object-storage/iam/public-access.html).
+        * Copy the `apikey` and `iam_role_crn` values within the service credentials to the `COS_API_KEY` and `COS_IAM_ROLE_CRN` environment variables in the `.env` file you created in step 2.
+        * Navigate to the `endpoints` URL within the service credentials (e.g. https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints) and choose a `public` `service-endpoint` that is close to your location. Copy your chosen endpoint to the `COS_ENDPOINT` environment variable in the `.env` file you created in step 2.
+
+## 4. Install dependencies and run the applications
 
 ### Server
-
-1. If you have not done so already, install [Python](https://www.python.org/downloads/) and [Pipenv](https://pypi.org/project/pipenv/). Activate the pipenv shell:
-      ```bash
-      pipenv shell
-      ```
+1. From the root project directory, create a pipenv virtual environment:
+    ```bash
+    pipenv --python <path to python executable>
+    ```
+    e.g. if python 3.6 is installed:
+    ```bash
+    pipenv --python 3.6
+    ```
     
-2. From your project root, download the project dependencies: 
+2. Activate the pipenv shell:
+    ```bash
+    pipenv shell
+    ```
+3. Install the project dependencies: 
+    ```bash
+    pipenv install
+    ```
+4. To run your application locally, use:  
+    ```bash 
+    python manage.py start
+    ```
+    The `manage.py` utility offers a variety of different run commands to match your situation:
+
+      * `start`: Starts a server in a production setting using `gunicorn`.
+      * `run`: Starts a native Flask development server. This includes backend reloading upon file saves and the Werkzeug stack-trace debugger for diagnosing runtime failures in-browser.
+      * `livereload`: Starts a development server using the `livereload` package. This includes backend reloading as well as dynamic frontend browser reloading. The Werkzeug stack-trace debugger will be disabled, so this is only recommended when working on frontend development.
+      * `debug`: Starts a native Flask development server, but with the native reloader/tracer disabled. This leaves the debug port exposed to be attached to an IDE (such as PyCharm's `Attach to Local Process`).
+
+    There are also a few utility commands:
     
-      ```bash
-      pipenv install
-      ```
+      * `build`: Compiles `.py` files within the project directory into `.pyc` files.
+      * `test`: Runs all unit tests inside of the project's `test` directory.
 
-3. You can use a `manage.py` file to simplfy running your Flask applications and avoid having to configure environment variables to run your app. To run your application locally, use:  
-    
-      ```bash 
-      python manage.py start
-      ```
-
-The `manage.py` utility offers a variety of different run commands to match your situation:
-
-  * `start`: Starts a server in a production setting using `gunicorn`.
-  * `run`: Starts a native Flask development server. This includes backend reloading upon file saves and the Werkzeug stack-trace debugger for diagnosing runtime failures in-browser.
-  * `livereload`: Starts a development server using the `livereload` package. This includes backend reloading as well as dynamic frontend browser reloading. The Werkzeug stack-trace debugger will be disabled, so this is only recommended when working on frontend development.
-  * `debug`: Starts a native Flask development server, but with the native reloader/tracer disabled. This leaves the debug port exposed to be attached to an IDE (such as PyCharm's `Attach to Local Process`).
-
-There are also a few utility commands:
-
-  * `build`: Compiles `.py` files within the project directory into `.pyc` files.
-  * `test`: Runs all unit tests inside of the project's `test` directory.
-
-The server is running at: `http://localhost:3000/` in your browser. 
+    The server is running at: `http://localhost:3000/` in your browser. 
 
 ### Frontend UI
-
 1. If you have not done so already, install [`Node.js`](https://nodejs.org) and [`Yarn`](https://classic.yarnpkg.com/en/docs/install/).
 
-2. In a new terminal, change to the `frontend` directory and install the dependencies:
+2. In a new terminal, change to the `frontend` directory from the project root and install the dependencies:
     ```bash 
     cd frontend
     yarn install
     ```
     
 3. Launch the frontend application:  
-
     **Compiles and hot-reloads for development**
-
     ```bash
     yarn serve
     ```
-
+    
     **Compiles and minifies for production**
-
     ```bash
     yarn build
     ```
-
-    **Lints and fixes files**
     
+    **Lints and fixes files**
     ```bash
     yarn lint
     ```
-
 The frontend UI is now running at `http://localhost:8080/` in your browser. 
 
+## 5. Language Translator Extension
+This tutorial shows you how to create a Watson Language Translator service and write the necessary server side code to translate video transcriptions. The front-end UI implementation is left as an extension for you to implement yourself. Hint - inspecting the `upload_video` function in `server/routes/index.py`, you can see that the server side expects a `source` and a `target` language as part of the POST request form data to `/upload_video`. Supported language models are provided at [https://localhost:3000/language_models](http://localhost:3000/language_models) once your server is running.
 
-## 3. Deploy the app
-
+## 6. Deploy the app
 The following instructions apply to deploying the Python Flask server. To deploy the frontend UI, follow the [Node.js build and deploy tutorial](https://developer.ibm.com/node/getting-started-node-js-ibm-cloud/).
 
 ### Deploying to IBM Cloud
@@ -140,7 +146,7 @@ To get started building this application locally, you can either run the applica
 
 #### Native application development
 
-Native application development was covered in step 2 above when you installed and ran the app. Your application is running at: `http://localhost:3000/` in your browser.
+Native application development was covered in step 4 above when you installed and ran the app. Your server is running at: `http://localhost:3000/` in your browser.
 
 There are two different options for debugging a Flask project:
 

@@ -39,14 +39,13 @@ This tutorial should take about 30 minutes to complete.
 2. Create an `.env` file in the root project directory containing the following service credentials as environment variables:
 
 ```
-IAM_AUTHENTICATOR_STT=<api key for speech to text service>
-IAM_AUTHENTICATOR_STT_URL=<url for speech to text service>
-IAM_AUTHENTICATOR_TRANSLATE=<api key for translation service>
-LANGUAGE_TRANSLATOR_SERVICE=<translator service endpoint. e.g. https://api.eu-gb.language-translator.watson.cloud.ibm.com>
-COS_API_KEY_ID=<cloud object storage api key>
-COS_RESOURCE_CRN=<cloud object storage resource crn. e.g. crn:v1:bluemix:public:iam::::serviceRole:Writer>
-COS_AUTH_ENDPOINT=<cloud object storage auth endpoint. e.g. https://iam.cloud.ibm.com/identity/token>
-COS_ENDPOINT=<cloud object storage endpoint. e.g. https://s3.eu-gb.cloud-object-storage.appdomain.cloud>
+STT_API_KEY=<api key for speech to text service>
+STT_URL=<URL for speech to text service>
+TRANSLATE_API_KEY=<api key for translator service>
+TRANSLATE_URL=<URL for translator service>
+COS_API_KEY=<cloud object storage api key>
+COS_IAM_ROLE_CRN=<cloud object storage IAM role crn. e.g. crn:v1:bluemix:public:iam::::serviceRole:Writer>
+COS_ENDPOINT=<cloud object storage endpoint. e.g. s3.eu-gb.cloud-object-storage.appdomain.cloud>
 COS_BUCKET_NAME=<cloud object storage bucket name. e.g. transcripts>
 ```
 

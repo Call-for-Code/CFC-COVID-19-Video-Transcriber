@@ -12,7 +12,7 @@ import ibm_boto3
 from ibm_botocore.client import Config, ClientError
 import os, platform
 
-IBMCloudEnv.init()
+# IBMCloudEnv.init()
 
 def initServices(app):
     # Setup MQTT
@@ -23,17 +23,17 @@ def initServices(app):
 
     # Setup IBM Watson
     load_dotenv()
-    authenticator = IAMAuthenticator(os.getenv("IAM_AUTHENTICATOR_STT")) 
+    authenticator = IAMAuthenticator(os.getenv("STT_API_KEY")) 
     service = SpeechToTextV1(authenticator=authenticator) 
-    service.set_service_url(os.getenv("IAM_AUTHENTICATOR_STT_URL"))
+    service.set_service_url(os.getenv("STT_URL"))
     app.config['SPEECH_TO_TEXT'] = service
 
-    authenticator_translate = IAMAuthenticator(os.getenv("IAM_AUTHENTICATOR_TRANSLATE")) 
+    authenticator_translate = IAMAuthenticator(os.getenv("TRANSLATE_API_KEY")) 
     language_translator = LanguageTranslatorV3(
         version='2018-05-01',
         authenticator=authenticator_translate
     )
-    language_translator.set_service_url(os.getenv("LANGUAGE_TRANSLATOR_SERVICE"))
+    language_translator.set_service_url(os.getenv("TRANSLATE_URL"))
     app.config['LANGUAGE_TRANSLATOR'] = language_translator
 
     # IBM COS
@@ -42,9 +42,9 @@ def initServices(app):
            app.config['COS_ENDPOINT'] = 'https://' + app.config['COS_ENDPOINT']
            
     cos = ibm_boto3.resource("s3",
-        ibm_api_key_id=os.getenv("COS_API_KEY_ID"),
-        ibm_service_instance_id=os.getenv("COS_RESOURCE_CRN"),
-        ibm_auth_endpoint=os.getenv("COS_AUTH_ENDPOINT"),
+        ibm_api_key_id=os.getenv("COS_API_KEY"),
+        ibm_service_instance_id=os.getenv("COS_IAM_ROLE_CRN"),
+        ibm_auth_endpoint='https://iam.cloud.ibm.com/identity/token',
         config=Config(signature_version="oauth"),
         endpoint_url=app.config['COS_ENDPOINT'] 
     )

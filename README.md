@@ -33,6 +33,10 @@ cd cfc-covid-19-video-transcriber
 
 ## 2. Setup environment variables
 Create a `.env` file in the root project directory containing the following environment variables. Note - these will be replaced by your IBM Cloud service credentials in the next step.
+```bash
+touch .env
+```
+
 ```
 STT_API_KEY=<api key for speech to text service>
 STT_URL=<URL for speech to text service>

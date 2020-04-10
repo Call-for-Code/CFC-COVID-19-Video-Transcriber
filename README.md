@@ -60,7 +60,7 @@ Register/Login to [IBM Cloud](https://cloud.ibm.com) and create the following se
 ## 4. Install dependencies and run the applications
 
 ### Server
-1. From the root project directory, create a pipenv virtual environment:
+1. This tutorial uses [pipenv](https://github.com/pypa/pipenv). If you are using another python distribution or package manager, you will need to install the dependencies located in the `Pipfile`. Alternatively, using pipenv, from the root project directory, create a pipenv virtual environment.
     ```bash
     pipenv --python <path to python executable>
     ```

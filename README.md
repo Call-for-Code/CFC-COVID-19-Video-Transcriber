@@ -106,7 +106,7 @@ docker run --publish 3000:3000 --detach --name demo video-transcriber:1.0
 
     The server is running at: `http://localhost:3000/` in your browser. 
 
-### Frontend UI
+### Frontend UI Development
 1. If you have not done so already, install [`Node.js`](https://nodejs.org) and [`Yarn`](https://classic.yarnpkg.com/en/docs/install/).
 
 2. In a new terminal, change to the `frontend` directory from the project root and install the dependencies:

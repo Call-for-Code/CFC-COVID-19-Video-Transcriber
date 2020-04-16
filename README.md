@@ -63,6 +63,13 @@ Register/Login to [IBM Cloud](https://cloud.ibm.com) and create the following se
 
 ## 4. Install dependencies and run the applications
 
+### Docker
+
+```
+docker build --tag video-transcriber:1.0 .
+docker run --publish 3000:3000 --detach --name demo video-transcriber:1.0
+```
+
 ### Server
 1. This tutorial uses [pipenv](https://github.com/pypa/pipenv). If you are using another python distribution or package manager, you will need to install the dependencies located in the `Pipfile`. Alternatively, using pipenv, from the root project directory, create a pipenv virtual environment.
     ```bash

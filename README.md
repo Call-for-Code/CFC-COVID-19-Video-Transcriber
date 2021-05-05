@@ -1,9 +1,9 @@
+[![License](https://img.shields.io/badge/License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![Community](https://img.shields.io/badge/Join-Community-blue.svg)](https://developer.ibm.com/callforcode/solutions/projects/get-started/)
+
 # Call for Code Video Transcriber Starter Kit
 In an at-home learning environment, many students will gravitate to video lessons. Video can be an excellent way to learn, but instructors sometimes need to provide notes or assigned readings to students who either need additional or alternative ways of learning, or who do not have access to the original video. 
 
 The app you build in this tutorial will enable instructors to provide additional notes to students who are using video and audio tools as their primary way to learn. Teachers can also easily provide written instructions for students who for whatever reason cannot play a video. 
-
-The code and related files for this tutorial are located in the accompanying <a href="https://github.com/Call-for-Code/cfc-covid-19-video-transcriber" target="\_blank">GitHub repo</a>.
 
 ## Learning objectives
 In this tutorial, you'll learn how to:
